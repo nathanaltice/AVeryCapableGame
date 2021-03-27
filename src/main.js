@@ -1,11 +1,11 @@
 // Nathan Altice
 // Adapted to Phaser 3: 4/9/20
-// Updated: 6/30/20
+// Updated: 3/27/21
 // A Very Capable Game: a simple mad libs-style text "game" demonstrating Scene management
 // Passes state variables from scene to scene
 // Uses randomized words and colors for extra fun times 🌈
 
-// be strict
+// be strict 🙊
 'use strict';
 
 // Main Menu Scene
@@ -44,14 +44,14 @@ class GamePlay extends Phaser.Scene {
     }
 
     init(data) {
-        // grab vars from previous state
+        // grab player stats from previous scene
         this.stats = data;
         this.stats.level++;
         console.log(`level: ${this.stats.level}, life: ${this.stats.life}`);
     }
 
     create() {
-        // randomize 🎲
+        // randomize our various parts of speech 🎲
 		this.cameras.main.setBackgroundColor(getRandomHexColor());
 		let adj = getRandomWord(wordList.adjectives);
         let verb = getRandomWord(wordList.verbs);
@@ -83,14 +83,14 @@ class GamePlay extends Phaser.Scene {
     }
 }
 
-// Game Over State
+// Game Over Scene
 class GameOver extends Phaser.Scene {
     constructor() {
         super('gameOver');
     }
 
     init(data) {
-        // grab vars from previous state
+        // grab player stats from previous scene
         this.stats = data;
     }
 
@@ -120,19 +120,19 @@ let config = {
 
 let game = new Phaser.Game(config);
 
-/*
-Utility functions
-We can put these here due to the magic of function hoisting 🧙‍♂️
-*/
+/***************************************************************
+Beyond these depths be thine sundry utility functions...
+(We can put these here due to the magic of function hoisting 🧙‍♂️)
+****************************************************************/
 
 // create our word list (words from randomlists.com and my questionable brain)
 function initWordList() {
 	wordList = {};
 	wordList = {
         adjectives: ['nervous', 'oceanic', 'fuzzy', 'sore', 'untidy', 'flowery', 'muddled', 'hellish', 'overwrought', 'abrupt', 'quixotic', 'grumpy', 'enormous', 'capable', 'roomy', 'tender', 'spiky', 'magenta', 'cute', 'dusty', 'hot', 'exultant', 'massive', 'lush', 'aromatic', 'solid', 'wrathful', 'dull', 'grey', 'likeable', 'narrow', 'tall', 'eloquent', 'green', 'ragged', 'random', 'slimy', 'gruesome', 'weaponized', 'pious', 'rancid', 'frothy', 'blank', 'furry', 'lightweight', 'tropical', 'barren', 'studious', 'anxious', 'cloudy', 'plain', 'putrid', 'pink', 'academic', 'rancid', 'rugged', 'rumpled', 'dishonest', 'shaky', 'shady', 'sheltered', 'perfect', 'patchwork', 'salty', 'dark', 'dim', 'delicate', 'massive', 'golden', 'glib', 'gossamer', 'briny', 'jolly', 'art deco', 'dreary', 'hooded', 'chilled', 'expansive', 'sinister', 'dubious', 'troublesome', 'tired', 'exhausted', 'tragic', 'shallow', 'dense', 'dilapidated', 'fireproof', 'brackish', 'scalding'],
-		nouns: ['fire', 'hydrant', 'spoon', 'frog', 'leg', 'person', 'baseball', 'ghost', 'ocean', 'stranger', 'bulb', 'galaxy', 'government', 'bed', 'giraffe', 'smell', 'oven', 'orange', 'snail', 'parcel', 'wax', 'seashore', 'desk', 'pie', 'crowd', 'toothbrush', 'sink', 'trees', 'cemetery', 'tombstone', 'sky', 'giants', 'apparatus', 'ladybug', 'machine', 'rabbits', 'hill', 'notebook', 'cabbage', 'car', 'trousers', 'bee', 'hippo', 'turnip', 'pillows', 'raven', 'potion', 'zealot', 'curtain', 'espresso', 'professor', 'plant', 'encyclopedia', 'office chair', 'trellis', 'gymnasium', 'sweater', 'whiskey', 'album', 'napkin', 'armoir', 'stew', 'werewolf', 'final exam', 'birthday party', 'poultry', 'prom date', 'painting', 'helicopter', 'pretzel', 'serpent', 'pandemic', 'console', 'shoehorn', 'lantern', 'bake sale', 'rooftops', 'spaghetti', 'tracksuit', 'belt loops', 'breakfast cereal', 'board games', 'Steam library', 'superhero', 'dirt bike', 'sophomores', 'salad', 'hedges', 'jambalaya', 'mascots', 'code', 'dentist', 'cowboy hat', 'trumpet', 'goose', 'DLC', 'streamers', 'spreadsheet', 'harpy', 'clown car', 'shopping mall', 'HDTV', 'dresser drawer', 'vinyl sticker', 'dad', 'Zoom meeting'],
-		verbs: ['excused', 'carved', 'offended', 'sailed', 'destroyed', 'poured', 'disarmed', 'borrowed', 'expanded', 'burned', 'decorated', 'invented', 'recorded', 'boiled', 'crossed', 'squeezed', 'filmed', 'juggled', 'scratched', 'popped', 'mined', 'pined for', 'prayed for', 'painted', 'annoyed', 'delayed', 'supported', 'challenged', 'broke', 'shaved', 'tossed', 'teased', 'taunted', 'dropped', 'toppled', 'barbequed', 'mirrored', 'trapped', 'wounded', 'hoodwinked', 'perplexed', 'trampled', 'evacuated', 'smooshed', 'sold', 'catapulted', 'halted', 'outbid', 'outraged', 'outran', 'slapped', 'hugged', 'frisked', 'calmed', 'married', 'countered', 'collided with', 'tripped', 'tolerated', 'jumped over', 'disentangled', 'evaporated', 'banished', 'berated', 'reprimanded', 'deleted', 'swindled', 'blamed', 'quarantined', 'deceived', 'detected', 'soothed', 'uncovered', 'outraged', 'uplifted', 'sharpened', 'served', 'shamed', 'sold', 'shocked', 'scolded', 'proposed to', 'censored', 'shoplifted', 'argued with', 'consoled', 'doctored', 'emptied', 'outspent', 'halted', 'dreamed about', 'enunciated', 'piled on', 'disarmed', 'cooked', 'staggered', 'stymied', 'debriefed','bounced', 'catapulted', 'mistreated', 'texted', 'surveyed', 'displayed', 'canceled'],
-		adverbs: ['fondly', 'sweetly', 'reluctantly', 'fatally', 'knowingly', 'greedily', 'rapidly', 'blissfully', 'successfully', 'politely', 'elegantly', 'youthfully', 'zestfully', 'busily', 'delightfully', 'gleefully', 'generously', 'helplessly', 'sheepishly', 'calmly', 'honestly', 'daintily', 'keenly', 'mostly', 'hungrily', 'shakily', 'worriedly', 'urgently', 'queasily', 'unnaturally', 'unexpectedly', 'quietly', 'surreptitiously', 'bashfully', 'hungrily', 'promptly', 'jauntily', 'steadily', 'staunchly', 'silently', 'cautiously', 'craftily', 'timelessly', 'mournfully', 'effortlessly', 'prematurely', 'handsomely', 'recklessly', 'cheerfully', 'half-heartedly', 'hopelessly', 'definitively', 'purposefully', 'tactfully', 'fervently', 'triumphantly', 'carelessly', 'unceremoniously', 'unanimously', 'presciently', 'questionably', 'problematically', 'predictably', 'circuitously', 'preemptively', 'barely', 'handily', 'doggedly', 'purposefully', 'crankily', 'briefly', 'pointedly', 'truthfully', 'dourly', 'gloomily']
+		nouns: ['fire', 'hydrant', 'spoon', 'frog', 'leg', 'person', 'baseball', 'ghost', 'ocean', 'stranger', 'bulb', 'galaxy', 'government', 'bed', 'giraffe', 'smell', 'oven', 'orange', 'snail', 'parcel', 'wax', 'seashore', 'desk', 'pie', 'crowd', 'toothbrush', 'sink', 'trees', 'cemetery', 'tombstone', 'sky', 'giants', 'apparatus', 'ladybug', 'machine', 'rabbits', 'hill', 'notebook', 'cabbage', 'car', 'trousers', 'bee', 'hippo', 'turnip', 'pillows', 'raven', 'potion', 'zealot', 'curtain', 'espresso', 'professor', 'plant', 'encyclopedia', 'office chair', 'trellis', 'gymnasium', 'sweater', 'whiskey', 'album', 'napkin', 'armoir', 'stew', 'werewolf', 'final exam', 'birthday party', 'poultry', 'prom date', 'painting', 'helicopter', 'pretzel', 'serpent', 'pandemic', 'console', 'shoehorn', 'lantern', 'bake sale', 'rooftops', 'spaghetti', 'tracksuit', 'belt loops', 'breakfast cereal', 'board games', 'Steam library', 'superhero', 'dirt bike', 'sophomores', 'salad', 'hedges', 'jambalaya', 'mascots', 'code', 'dentist', 'cowboy hat', 'trumpet', 'goose', 'DLC', 'streamers', 'spreadsheet', 'harpy', 'clown car', 'shopping mall', 'HDTV', 'dresser drawer', 'vinyl sticker', 'dad', 'Zoom meeting', 'tsunami', 'cremini mushroom'],
+		verbs: ['excused', 'carved', 'offended', 'sailed', 'destroyed', 'poured', 'disarmed', 'borrowed', 'expanded', 'burned', 'decorated', 'invented', 'recorded', 'boiled', 'crossed', 'squeezed', 'filmed', 'juggled', 'scratched', 'popped', 'mined', 'pined for', 'prayed for', 'painted', 'annoyed', 'delayed', 'supported', 'challenged', 'broke', 'shaved', 'tossed', 'teased', 'taunted', 'dropped', 'toppled', 'barbequed', 'mirrored', 'trapped', 'wounded', 'hoodwinked', 'perplexed', 'trampled', 'evacuated', 'smooshed', 'sold', 'catapulted', 'halted', 'outbid', 'outraged', 'outran', 'slapped', 'hugged', 'frisked', 'calmed', 'married', 'countered', 'collided with', 'tripped', 'tolerated', 'jumped over', 'disentangled', 'evaporated', 'banished', 'berated', 'reprimanded', 'deleted', 'swindled', 'blamed', 'quarantined', 'deceived', 'detected', 'soothed', 'uncovered', 'outraged', 'uplifted', 'sharpened', 'served', 'shamed', 'sold', 'shocked', 'scolded', 'proposed to', 'censored', 'shoplifted', 'argued with', 'consoled', 'doctored', 'emptied', 'outspent', 'halted', 'dreamed about', 'enunciated', 'piled on', 'disarmed', 'cooked', 'staggered', 'stymied', 'debriefed','bounced', 'catapulted', 'mistreated', 'texted', 'surveyed', 'displayed', 'canceled', 'cremated', 'gargled', 'manicured'],
+		adverbs: ['fondly', 'sweetly', 'reluctantly', 'fatally', 'knowingly', 'greedily', 'rapidly', 'blissfully', 'successfully', 'politely', 'elegantly', 'youthfully', 'zestfully', 'busily', 'delightfully', 'gleefully', 'generously', 'helplessly', 'sheepishly', 'calmly', 'honestly', 'daintily', 'keenly', 'mostly', 'hungrily', 'shakily', 'worriedly', 'urgently', 'queasily', 'unnaturally', 'unexpectedly', 'quietly', 'surreptitiously', 'bashfully', 'hungrily', 'promptly', 'jauntily', 'steadily', 'staunchly', 'silently', 'cautiously', 'craftily', 'timelessly', 'mournfully', 'effortlessly', 'prematurely', 'handsomely', 'recklessly', 'cheerfully', 'half-heartedly', 'hopelessly', 'definitively', 'purposefully', 'tactfully', 'fervently', 'triumphantly', 'carelessly', 'unceremoniously', 'unanimously', 'presciently', 'questionably', 'problematically', 'predictably', 'circuitously', 'preemptively', 'barely', 'handily', 'doggedly', 'purposefully', 'crankily', 'briefly', 'pointedly', 'truthfully', 'dourly', 'gloomily', 'tangentially', 'nonchalantly']
 	};
 }
 
